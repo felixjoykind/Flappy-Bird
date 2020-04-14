@@ -30,28 +30,28 @@ class Bird(pg.sprite.Sprite):
             self.pos.y = HEIGHT
 
         # Checking for a colission with pipes
-        if (self.pos[0] > self.pipe_pair1.top.pos[0]-50 and self.pos[1] < self.pipe_pair1.top.pos[1]+20 and self.pos[0] < self.pipe_pair1.top.pos[0]+40):
+        if (self.pos[0] > self.pipe_pair1.top.pos[0]-55 and self.pos[1] < self.pipe_pair1.top.pos[1]+25 and self.pos[0] < self.pipe_pair1.top.pos[0]+40):
             time.sleep(1)
             self.game.playing = False # Stopping game loop and restarting it
             # Reseting settings
             self.game.text_to_draw  ="Flappy Bird"
             self.score = 0
             self.game.text_left_offset = WIDTH/2-105
-        elif (self.pos[0] > self.pipe_pair2.top.pos[0]-50 and self.pos[1] < self.pipe_pair2.top.pos[1]+20 and self.pos[0] < self.pipe_pair2.top.pos[0]+40):
+        elif (self.pos[0] > self.pipe_pair2.top.pos[0]-55 and self.pos[1] < self.pipe_pair2.top.pos[1]+25 and self.pos[0] < self.pipe_pair2.top.pos[0]+40):
             time.sleep(1)
             self.game.playing = False # Stopping game loop and restarting it
             # Reseting settings
             self.game.text_to_draw  ="Flappy Bird"
             self.score = 0
             self.game.text_left_offset = WIDTH/2-105
-        elif self.pos[0] > self.pipe_pair1.bottom.pos[0]-50 and self.pos[1] > self.pipe_pair1.bottom.pos[1]-self.pipe_pair1.bottom.image.get_height() and self.pos[0] < self.pipe_pair1.bottom.pos[0]+40:
+        elif self.pos[0] > self.pipe_pair1.bottom.pos[0]-55 and self.pos[1] > self.pipe_pair1.bottom.pos[1]-self.pipe_pair1.bottom.image.get_height()+5 and self.pos[0] < self.pipe_pair1.bottom.pos[0]+40:
             time.sleep(1)
             self.game.playing = False # Stopping game loop and restarting it
             # Reseting settings
             self.game.text_to_draw  ="Flappy Bird"
             self.score = 0
             self.game.text_left_offset = WIDTH/2-105
-        elif self.pos[0] > self.pipe_pair2.bottom.pos[0]-50 and self.pos[1] > self.pipe_pair2.bottom.pos[1]-self.pipe_pair2.bottom.image.get_height() and self.pos[0] < self.pipe_pair2.bottom.pos[0]+40:
+        elif self.pos[0] > self.pipe_pair2.bottom.pos[0]-55 and self.pos[1] > self.pipe_pair2.bottom.pos[1]-self.pipe_pair2.bottom.image.get_height()+5 and self.pos[0] < self.pipe_pair2.bottom.pos[0]+40:
             time.sleep(1)
             self.game.playing = False # Stopping game loop and restarting it
             # Reseting settings
