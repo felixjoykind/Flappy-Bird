@@ -17,7 +17,6 @@ class Bird(pg.sprite.Sprite):
         self.vel = vec(0, 0) # Moving
         self.acc = vec(0, 0) # Gravity
         self.score = 0
-        self.high_score = self.score
         self.pipe_pair1 = pipe_pair1
         self.pipe_pair2 = pipe_pair2
 
@@ -62,14 +61,14 @@ class Bird(pg.sprite.Sprite):
         # Checking for scoring
         elif (self.pos[0] > self.pipe_pair1.top.pos[0]-50 and self.pos[0] < self.pipe_pair1.top.pos[0]+50 and self.pos[1] > self.pipe_pair1.top.pos[1]) and (self.pos[1] < self.pipe_pair1.bottom.pos[1]-self.pipe_pair1.bottom.image.get_height()):
             self.score += self.pipe_pair1.value
-            if self.score > self.high_score:
+            if self.score > self.game.high_score:
                 self.game.high_score = self.score
             self.game.text_to_draw = str(self.score) # Updating score
             self.game.text_left_offset = WIDTH/2-10 # Moving Score to center of the screen
             self.pipe_pair1.value = 0
         elif (self.pos[0] > self.pipe_pair2.top.pos[0]-50 and self.pos[0] < self.pipe_pair2.top.pos[0]+50 and self.pos[1] > self.pipe_pair2.top.pos[1]) and (self.pos[1] < self.pipe_pair2.bottom.pos[1]-self.pipe_pair2.bottom.image.get_height()):
             self.score += self.pipe_pair2.value
-            if self.score > self.high_score:
+            if self.score > self.game.high_score:
                 self.game.high_score = self.score
             self.game.text_to_draw = str(self.score) # Updating score
             self.game.text_left_offset = WIDTH/2-10 # Moving Score to center of the screen
