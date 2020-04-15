@@ -2,6 +2,7 @@ import pygame as pg
 import random
 from sprites import *
 from settings import *
+import time
 
 class Game(object):
     def __init__(self):
@@ -14,6 +15,8 @@ class Game(object):
         self.running = True
         self.text_to_draw = "Flappy Bird"
         self.text_left_offset = WIDTH/2-105
+        self.game_over = False
+        self.high_score = 0 # Player high score
 
     def display_all_sprites(self):
         self.clock.tick(FPS)
@@ -27,6 +30,7 @@ class Game(object):
         self.pipe_pair1 = PipePair(self, WIDTH+50) # Creating pipe pair 1
         self.pipe_pair2 = PipePair(self, WIDTH*1.7) # Creating pipe pair 2
         self.bird = Bird(self, self.pipe_pair1, self.pipe_pair2) # Creating the bird
+        self.end = End_Screen(self)
         self.all_sprites.add(self.bird) # Adding bird to all sprites group
         self.all_sprites.add(self.pipe_pair1.bottom) # Adding bottom pipe from pipe pair 1 to all sprites group
         self.all_sprites.add(self.pipe_pair1.top) # Adding top pipe from pipe pair 1 to all sprites group
@@ -49,10 +53,17 @@ class Game(object):
         # Game loop
         self.playing = True
         while self.playing:
-            self.clock.tick(FPS)
-            self.events() # Checking for pressing buttons, etc...
-            self.update() # Updating all sprites and game
-            self.draw() # Redrawing all sprites
+                self.clock.tick(FPS)
+
+                if self.game_over == False:
+                    self.events() # Checking for pressing buttons, etc...
+                    self.update() # Updating all sprites and game
+
+                self.draw() # Redrawing all sprites
+
+                if self.game_over:
+                    self.events() # Checking for pressing buttons, etc...
+                    self.end.update() # Updating, moving end screen with score and high score
 
     def update(self):
         # Updating the Game
@@ -67,8 +78,18 @@ class Game(object):
                     self.playing = False
                 self.running = False
             if event.type == pg.KEYDOWN: # If SPACE is pressed
-                if event.key == pg.K_SPACE:
+                if event.key == pg.K_SPACE and self.game_over == False:
                     self.bird.jump() # Jump
+                elif self.game_over: # If game is over
+                    # Reseting settings
+                    self.start_screen(self.text_to_draw, self.text_left_offset)
+                    self.game_over = False
+                    self.text_to_draw = str(self.bird.score)
+                    self.text_left_offset = WIDTH/2-10
+                    # Restarting the game
+                    self.playing = False
+                    self.text_to_draw = "Flappy Bird"
+                    self.text_left_offset = WIDTH/2-105
 
     def draw(self):
         # Game loop - draw
@@ -76,11 +97,12 @@ class Game(object):
         # Drawing all sprites
         self.all_sprites.draw(self.screen)
         self.start_screen(self.text_to_draw, self.text_left_offset)
+        self.end.draw()
 
         pg.display.flip()
 
     def start_screen(self, text, position):
-        msg = FONT.render(text, 0 , WHITE)
+        msg = FONT_ARIAL.render(text, 0 , WHITE)
         self.screen.blit(msg, (position, HEIGHT/2-250))
 
 g = Game()
