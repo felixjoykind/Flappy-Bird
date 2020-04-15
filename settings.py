@@ -27,3 +27,4 @@ DISTANCE_BITWEEN_PIPES = 160
 # Fonts
 FONT_ARIAL = pygame.font.SysFont("Arial", 50)
 FONT_ARIAL_SMALL = pygame.font.SysFont("ARial", 35)
+FONT_ARIAL_HIGH_SMALL = pygame.font.SysFont("ARial", 30)
