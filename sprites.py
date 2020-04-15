@@ -193,5 +193,5 @@ class End_Screen(pg.sprite.Sprite):
         self.game.screen.blit(msg, (self.pos[0]-self.image.get_width()/4-5, self.pos[1]-self.image.get_height()+10))
 
         # Displaying player high score
-        msg = FONT_ARIAL_SMALL.render(f"High Score: {self.game.high_score}", 0 , WHITE)
-        self.game.screen.blit(msg, (self.pos[0]-self.image.get_width()/4-35, self.pos[1]-self.image.get_height()+60))
+        msg = FONT_ARIAL_HIGH_SMALL.render(f"High Score: {self.game.high_score}", 0 , WHITE)
+        self.game.screen.blit(msg, (self.pos[0]-self.image.get_width()/4-25, self.pos[1]-self.image.get_height()+60))
